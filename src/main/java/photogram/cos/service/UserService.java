@@ -4,8 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
 import photogram.cos.domain.user.User;
 import photogram.cos.domain.user.UserRepository;
+import photogram.cos.handler.ex.CustomValidationApiException;
 
 @RequiredArgsConstructor
 @Service
@@ -17,7 +19,10 @@ public class UserService {
     @Transactional
     public User 회원수정(int id, User user) {
         //1. 영속화
-        User userEntity = userRepository.findById(id).get(); //1. 찾으면 -> get() 2. 못찾으면 -> orElseThrow()
+        User userEntity = userRepository.findById(id).orElseThrow(() ->
+                {
+                    return new CustomValidationApiException("찾을 수 없는 id 입니다.");
+                }); //1. 찾으면 -> get() 2. 못찾으면 -> orElseThrow()
 
         //2. 영속화된 오브젝트 수정 - 더티체킹 (업데이트 완료)
         userEntity.setName(user.getName());

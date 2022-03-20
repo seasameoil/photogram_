@@ -1,7 +1,6 @@
 package photogram.cos.config.auth;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import photogram.cos.domain.user.User;
@@ -9,7 +8,7 @@ import photogram.cos.domain.user.User;
 import java.util.ArrayList;
 import java.util.Collection;
 
-@Getter @Setter
+@Data
 public class PrincipalDetails implements UserDetails {
 
     private static final long serialVersionUID = 1L;

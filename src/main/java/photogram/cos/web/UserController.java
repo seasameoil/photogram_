@@ -1,6 +1,7 @@
 package photogram.cos.web;
 
 //import org.springframework.security.core.Authentication;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 //import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import photogram.cos.config.auth.PrincipalDetails;
 
+@RequiredArgsConstructor
 @Controller
 public class UserController {
 
