@@ -21,3 +21,11 @@ spring:
 logging.level:
   org.hibernate.SQL: debug
 # org.hibernate.type: trace
+
+servlet:
+  multipart:
+    enabled: true
+    max-file-size: 2MB
+
+file:
+  path: /Desktop/Spring/spring-3/upload/
