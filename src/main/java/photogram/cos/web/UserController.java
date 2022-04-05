@@ -5,16 +5,24 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 //import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import photogram.cos.config.auth.PrincipalDetails;
+import photogram.cos.domain.user.User;
+import photogram.cos.service.UserService;
 
 @RequiredArgsConstructor
 @Controller
 public class UserController {
 
+    private final UserService userService;
+
     @GetMapping("/user/{id}")
-    public String profile(@PathVariable int id) {
+    public String profile(@PathVariable int id, Model model) {
+
+        User userEntity = userService.회원프로필(id);
+        model.addAttribute("user", userEntity);
         return "/user/profile";
     }
 

@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 import photogram.cos.handler.ex.CustomApiException;
+import photogram.cos.handler.ex.CustomException;
 import photogram.cos.handler.ex.CustomValidationApiException;
 import photogram.cos.handler.ex.CustomValidationException;
 import photogram.cos.util.Script;
@@ -18,7 +19,17 @@ public class ControllerExceptionHandler {
     @ExceptionHandler(CustomValidationException.class)
     public String validationException(CustomValidationException e) {
 
-        return Script.back(e.getErrorMap().toString());
+        if(e.getErrorMap() == null) {
+            return Script.back(e.getMessage());
+        } else {
+            return Script.back(e.getErrorMap().toString());
+        }
+    }
+
+    @ExceptionHandler(CustomValidationException.class)
+    public String exception(CustomException e) {
+
+        return Script.back(e.getMessage());
     }
 
     @ExceptionHandler(CustomValidationApiException.class)

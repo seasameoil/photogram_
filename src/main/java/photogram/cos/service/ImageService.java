@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import photogram.cos.config.auth.PrincipalDetails;
+import photogram.cos.domain.image.Image;
 import photogram.cos.domain.image.ImageRepository;
 import photogram.cos.web.dto.image.ImageUploadDto;
 
@@ -35,5 +36,9 @@ public class ImageService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        //image 테이블에 저장
+        Image image = imageUploadDto.toEntity(imageFileName, principalDetails.getUser());
+        Image imageEntity = imageRepository.save(image);
     }
 }
